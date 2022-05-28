@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:weather/pages/home_page.dart';
+import 'package:weather/pages/home_page/ui/home_page_ui.dart';
 import 'package:weather/services/di_service.dart';
 import 'package:weather/services/hive_service.dart';
 
-void main() async{
+void main() async {
   await DependencyInjectionService.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
