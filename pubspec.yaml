@@ -13,32 +13,37 @@ dependencies:
 
   cupertino_icons: ^1.0.2
 
-  # For State Management
+  # For State Management (1)
   get: ^4.6.5
 
-  # For Networking
+  # For Networking (2)
   http: ^0.13.4
 
-  # For Console Outputs
+  # For Console Outputs (3)
   logger: ^1.1.0
 
-  # For Location
+  # For Location (4)
   geolocator: ^8.2.1
 
-  # For Glassmorphism
+  # For Glassmorphism (5)
   glassmorphism: ^3.0.0
 
-  # For Local Database
+  # For Local Database (6 - 7)
   hive: ^2.2.1
   hive_flutter: ^1.1.0
 
-  # For Lottie Animations
+  # For Lottie Animations (8)
   lottie: ^1.3.0
 
-  # Bottom Navigation Bar With Bottom Sheet
+  # Bottom Navigation Bar With Bottom Sheet (9)
   bottom_bar_with_sheet: ^2.4.0
+
+  # For hourly data ui (10)
   widget_slider: ^0.1.0
 
+  # For future data ui (11 - 12)
+  flutter_carousel_slider: ^1.0.8
+  awesome_page_transitions: ^1.0.0
 
 dev_dependencies:
   flutter_test:
