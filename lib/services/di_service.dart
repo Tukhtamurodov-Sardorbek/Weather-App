@@ -5,6 +5,7 @@ class DependencyInjectionService {
     //Get.put<PaymentController>(PaymentController());
 
     // Get.lazyPut<HomeController>(() => HomeController(), fenix: true);
+    // Get.lazyPut<ForecastController>(() => ForecastController(), fenix: true);
     // Get.lazyPut<CurrentController>(() => CurrentController(), fenix: true);
   }
 }

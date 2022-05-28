@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
+import 'package:weather/models/weather_data_model.dart';
 
 class WeatherService {
   static bool isTester = true;
@@ -50,8 +51,8 @@ class WeatherService {
 
   /* Http parsing */
 
-  // static parseResponse(String response) {
-  //   Weather weather = Weather.fromJson(jsonDecode(response));
-  //   return weather;
-  // }
+  static parseResponse(String response) {
+    Weather weather = Weather.fromJson(jsonDecode(response));
+    return weather;
+  }
 }

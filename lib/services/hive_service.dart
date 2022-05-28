@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:hive/hive.dart';
 
 enum StorageKeys {
@@ -54,7 +52,7 @@ class HiveService {
     return [];
   }
 
-  static Future<void> removeUsers(String key) async {
+  static Future<void> removeData(String key) async {
     await box.delete(key);
   }
 }
