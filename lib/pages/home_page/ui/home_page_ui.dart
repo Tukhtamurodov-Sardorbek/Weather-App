@@ -1,8 +1,11 @@
 import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:weather/pages/current_weather_page/ui/current_weather_page_ui.dart';
+import 'package:weather/pages/forecast_weather_page/ui/forecast_page_ui.dart';
 import 'package:weather/pages/home_page/controller/home_controller.dart';
 import 'package:weather/services/color_service.dart';
+import 'package:weather/utils/onWillPop.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,15 +18,13 @@ class HomePage extends StatelessWidget {
         return Scaffold(
           backgroundColor: ColorService.darkBlue,
           body: WillPopScope(
-            onWillPop: () => _controller.onWillPop(),
+            onWillPop: () => onWillPopFunction(),
             child: PageView(
               controller: _controller.pageController,
               physics: const NeverScrollableScrollPhysics(),
               children: [
-                // Current(),
-                // ForecastWeatherPage(),
-                Container(color: Colors.redAccent),
-                Container(color: Colors.greenAccent),
+                CurrentPage(),
+                ForecastPage(),
               ],
               onPageChanged: (int index) {
                 _controller.onPageChange(index);

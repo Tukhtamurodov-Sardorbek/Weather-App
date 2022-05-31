@@ -2,31 +2,17 @@ import 'package:bottom_bar_with_sheet/bottom_bar_with_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class HomeController extends GetxController{
   int currentPage = 0;
   bool isOpen = false;
   bool isVisible = true;
   bool firstTimeUse = true;
-  DateTime? lastPressed;
+  bool hasInternet = false;
   PageController pageController = PageController();
   ScrollController scrollController = ScrollController();
   BottomBarWithSheetController bottomBarController = BottomBarWithSheetController(initialIndex: 0);
-
-
-  // #Double tap to exit
-  Future<bool> onWillPop() async{
-    final now = DateTime.now();
-    const maxDuration = Duration(seconds: 2);
-    final isWarning = lastPressed == null || now.difference(lastPressed!) > maxDuration;
-
-    if(isWarning){
-      lastPressed = DateTime.now();
-      // doubleTap(context);
-      return false;
-    }
-    return true;
-  }
 
   // #Update current page on moving to the next or previous page
   void onPageChange(int index){
@@ -60,6 +46,12 @@ class HomeController extends GetxController{
           break;
       }
     });
+
+    InternetConnectionChecker().onStatusChange.listen((event) {
+      hasInternet = event == InternetConnectionStatus.connected;
+      update();
+    });
+
     super.onInit();
   }
 }
