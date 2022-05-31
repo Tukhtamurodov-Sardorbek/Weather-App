@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 
 enum StorageKeys {
+  PERMISSION,
   DATE,
   LOCATION,
   HOUR,
@@ -14,6 +15,7 @@ class HiveService {
 
   static String key(StorageKeys key) {
     switch(key) {
+      case StorageKeys.PERMISSION: return 'deniedForever';
       case StorageKeys.DATE: return 'date';
       case StorageKeys.LOCATION: return 'location';
       case StorageKeys.HOUR: return 'hourly_weather';
@@ -23,21 +25,18 @@ class HiveService {
   }
 
   /// FOR A STRING
-  // static Future<void> storeString (String key, String data) async {
-  //   box.put(key, data);
-  // }
-  //
-  // static String loadString(String key){
-  //   if(box.containsKey(key)){
-  //     String data = box.get(key);
-  //     return data;
-  //   }
-  //   return 'No data';
-  // }
-  //
-  // static Future<void> removeString(String key) async {
-  //   box.delete(key);
-  // }
+  static Future<void> storeString (String key, String data) async {
+    box.put(key, data);
+  }
+
+  static String loadString(String key){
+    String data = box.get(key, defaultValue: '');
+    return data;
+  }
+
+  static Future<void> removeString(String key) async {
+    box.delete(key);
+  }
 
   /// FOR A LIST
   static Future<void> storeData (String key, List data) async {
@@ -45,11 +44,8 @@ class HiveService {
   }
 
   static List loadData(String key){
-    if(box.containsKey(key)){
-      List data = box.get(key);
-      return data;
-    }
-    return [];
+    List data = box.get(key, defaultValue: []);
+    return data;
   }
 
   static Future<void> removeData(String key) async {
