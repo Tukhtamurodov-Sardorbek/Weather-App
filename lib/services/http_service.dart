@@ -52,7 +52,7 @@ class WeatherService {
   /* Http parsing */
 
   static parseResponse(String response) {
-    Weather weather = Weather.fromJson(jsonDecode(response));
+    Weather? weather = Weather.fromJson(jsonDecode(response));
     return weather;
   }
 }
