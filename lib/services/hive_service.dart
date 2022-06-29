@@ -7,6 +7,8 @@ enum StorageKeys {
   HOUR,
   CURRENT_WEATHER,
   FUTURE_WEATHER,
+  ALL_DATA_ARE_STORED,
+  IS_EMPTY,
 }
 
 class HiveService {
@@ -21,6 +23,8 @@ class HiveService {
       case StorageKeys.HOUR: return 'hourly_weather';
       case StorageKeys.CURRENT_WEATHER: return 'current_weather';
       case StorageKeys.FUTURE_WEATHER: return 'future_weather';
+      case StorageKeys.ALL_DATA_ARE_STORED: return 'all_stored';
+      case StorageKeys.IS_EMPTY: return 'is_empty';
     }
   }
 
