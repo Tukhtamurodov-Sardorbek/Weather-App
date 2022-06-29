@@ -32,6 +32,7 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox(HiveService.DB_NAME);
 
+
   runApp(
     MultiProvider(
       providers: [
@@ -39,9 +40,11 @@ void main() async {
           create: (BuildContext context) => SplashProvider(),
         ),
         ChangeNotifierProvider(
-            create: (BuildContext context) => HomeProvider()),
+            create: (BuildContext context) => HomeProvider()
+        ),
         ChangeNotifierProvider(
-            create: (BuildContext context) => CurrentWeatherProvider()),
+            create: (BuildContext context) => CurrentWeatherProvider()
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -55,7 +58,7 @@ void main() async {
             elevation: 0,
           ),
         ),
-        home: SplashPage(),
+        home: const SplashPage(),
       ),
     ),
   );
