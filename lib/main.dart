@@ -1,42 +1,62 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:weather/pages/splash_page/ui/splash_page_ui.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:weather/services/di_service.dart';
+import 'package:weather/pages/current_weather_data/provider.dart';
+import 'package:weather/pages/home/provider.dart';
+import 'package:weather/pages/splash/provider.dart';
+import 'package:weather/pages/splash/view.dart';
 import 'package:weather/services/hive_service.dart';
 import 'package:weather/services/color_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // #StatusBar & NavigationBar Color
+
+  // * StatusBar & NavigationBar Color
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: ColorService.darkBlue,
       systemNavigationBarColor: ColorService.darkBlue,
     ),
   );
-  // #Orientations
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  await DependencyInjectionService.init();
+  // * Orientations
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
+
+  // * Local Database
   await Hive.initFlutter();
   await Hive.openBox(HiveService.DB_NAME);
-  runApp(const MyApp());
-}
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Weather',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (BuildContext context) => SplashProvider(),
+        ),
+        ChangeNotifierProvider(
+            create: (BuildContext context) => HomeProvider()),
+        ChangeNotifierProvider(
+            create: (BuildContext context) => CurrentWeatherProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Weather',
+        themeMode: ThemeMode.dark,
+        theme: ThemeData(
+          primaryColor: Colors.black,
+          scaffoldBackgroundColor: ColorService.darkBlue,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: ColorService.darkBlue,
+            elevation: 0,
+          ),
+        ),
+        home: SplashPage(),
       ),
-      home: const SplashPage(),
-    );
-  }
+    ),
+  );
 }
